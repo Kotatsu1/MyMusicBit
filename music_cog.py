@@ -122,7 +122,7 @@ class music_cog(commands.Cog):
 
     @commands.command(name="docker", help='We\'re testring docker')
     async def docker(self, ctx):
-        await ctx.send('Docker works!')
+        await ctx.send('Docker works!!!')
 
 
 async def setup(bot):
