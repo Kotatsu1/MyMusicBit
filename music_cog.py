@@ -120,9 +120,9 @@ class music_cog(commands.Cog):
         await ctx.send('Queue cleared')
 
 
-    @commands.command(name="docker", help='We\'re testring docker')
-    async def docker(self, ctx):
-        await ctx.send('Docker works!!!!')
+    # @commands.command(name="docker", help='We\'re testring docker')
+    # async def docker(self, ctx):
+    #     await ctx.send('changes')
 
 
 async def setup(bot):
