@@ -77,7 +77,7 @@ class music_cog(commands.Cog):
                 if self.is_playing == False:
                     await self.play_music(ctx)
 
-    @commands.command(name="pause", help="Pause the current son12")
+    @commands.command(name="pause", help="Pause the current son123")
     async def pause(self, ctx, *args):
         if self.is_playing:
             self.is_playing = False

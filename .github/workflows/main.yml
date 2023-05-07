@@ -19,7 +19,7 @@ jobs:
         run: docker build -t kotatsu111/my-bot:discord_bot .
 
       - name: Log in Docker Hub
-        run: docker login -u nikitakotatsu@gmail.com -p Footfetish69
+        run: docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push image to Docker Hub
         run: docker push kotatsu111/my-bot:discord_bot
