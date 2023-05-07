@@ -38,8 +38,11 @@ jobs:
           port: 22
           
           script: |
-            # Login into Digital Ocean Registry
+            # Login to Docker Hub
             sudo docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+            # Pull from Docker Hub
+            sudo docker pull kotatsu111/my-bot:discord_bot
 
             # Stop running container
             sudo docker stop music_bot
