@@ -1,4 +1,3 @@
 discord
 PyNaCl
 yt-dlp
-requests
