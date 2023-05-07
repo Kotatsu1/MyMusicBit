@@ -1,7 +1,9 @@
 import discord
 from discord.ext import commands
-from config import TOKEN
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 
 bot = commands.Bot(command_prefix='/',  intents=discord.Intents.all())
@@ -14,4 +16,4 @@ async def on_ready():
     await setup(bot)
 
 
-bot.run(TOKEN)
+bot.run(os.getenv('TOKEN'))
