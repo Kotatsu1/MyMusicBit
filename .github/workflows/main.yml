@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v2
+
+      - name: Build container image
+        # run: docker build -t discord_bot:$(echo $GITHUB_SHA | head -c7) .
+        run: docker build -t kotatsu111/my-bot:discord_bot .
+
+      - name: Log in Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push image to Docker Hub
+        run: docker push kotatsu111/my-bot:discord_bot
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push'
+  #   needs: build_and_push
+
+  #   steps:
+  #     - name: Deploy to Digital Ocean droplet via SSH action
+  #       uses: appleboy/ssh-action@v0.1.3
+  #       with:
+  #         host: ${{ secrets.HOST }}
+  #         username: ${{ secrets.USERNAME }}
+  #         key: ${{ secrets.SSHKEY }}
+  #         port: ${{ secrets.PORT }}
+  #         envs: IMAGE_NAME,REGISTRY,GITHUB_SHA,LOGS_PATH,ENV_FILE_PATH,CONTAINER_NAME
+  #         script: |
+  #           # Login into Digital Ocean Registry
+  #           docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} $(echo $REGISTRY)
+
+  #           # Set env variables
+  #           export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+  #           export ACCESS_KEY=${{ secrets.ACCESS_KEY }}
+  #           export SECRET_KEY=${{ secrets.SECRET_KEY }}
+
+  #           # Stop running container
+  #           docker stop $(echo $CONTAINER_NAME)
+
+  #           # Remove old container
+  #           docker rm $(echo $CONTAINER_NAME)
+
+  #           # Run a new container from a new image
+  #           docker run --env-file $(echo $ENV_FILE_PATH) \
+  #           -v $(echo $LOGS_PATH):/logs -d \
+  #           --restart always \
+  #           --publish 8000:8000 \
+  #           --name $(echo $CONTAINER_NAME) \
+  #           --link=jewerly-db:db \
+  #           $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
