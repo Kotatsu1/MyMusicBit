@@ -51,11 +51,4 @@ jobs:
             sudo docker rm music_bot
 
             # Run a new container from a new image
-            sudo docker run --name music_bot kotatsu111/my-bot:discord_bot
-            
-      - name: My Step
-        run: |
-          function my-function() {
-            echo "Hello, world!"
-          }
-          my-function
+            sudo docker run -d --name music_bot kotatsu111/my-bot:discord_bot
