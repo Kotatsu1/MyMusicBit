@@ -15,13 +15,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build container image
-        run: docker build -t kotatsu111/my-bot:discord_bot1 .
+        run: docker build --no-cache -t kotatsu111/my-bot:discord_bot .
 
       - name: Log in Docker Hub
         run: docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push image to Docker Hub
-        run: docker push kotatsu111/my-bot:discord_bot1
+        run: docker push kotatsu111/my-bot:discord_bot
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,4 +48,4 @@ jobs:
             sudo docker rm music_bot
 
             # Run a new container from a new image
-            sudo docker run --name music_bot kotatsu111/my-bot:discord_bot1
+            sudo docker run --name music_bot kotatsu111/my-bot:discord_bot
