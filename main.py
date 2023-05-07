@@ -16,4 +16,4 @@ async def on_ready():
     await setup(bot)
 
 
-bot.run(os.getenv('TOKEN'))
+bot.run('MTA1MTAwMjcwOTcxMDQ4NzU2Mg.GdW47k.WXr2lsUXYzAh50eP1H0aebcEkOpuCoyexmGRRU')
