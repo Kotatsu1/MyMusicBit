@@ -39,13 +39,13 @@ jobs:
           
           script: |
             # Login into Digital Ocean Registry
-            docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASSWORD }}
+            sudo docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASSWORD }}
 
             # Stop running container
-            docker stop music_bot
+            sudo docker stop music_bot
 
             # Remove old container
-            docker rm music_bot
+            sudo docker rm music_bot
 
             # Run a new container from a new image
-            docker run --name music_bot kotatsu111/my-bot:discord_bot
+            sudo docker run --name music_bot kotatsu111/my-bot:discord_bot
