@@ -13,5 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main
-        run: curl 'localhost:8000'
+        run: curl '45.87.246.48:8000'
 
