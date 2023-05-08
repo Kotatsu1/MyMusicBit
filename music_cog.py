@@ -77,7 +77,7 @@ class music_cog(commands.Cog):
                 if self.is_playing == False:
                     await self.play_music(ctx)
 
-    @commands.command(name="pause", help="Pause the current son123")
+    @commands.command(name="pause", help="Pause the current song")
     async def pause(self, ctx, *args):
         if self.is_playing:
             self.is_playing = False
@@ -122,7 +122,7 @@ class music_cog(commands.Cog):
 
     @commands.command(name="docker", help='We\'re testring docker')
     async def docker(self, ctx):
-        await ctx.send('Илюха топ милик')
+        await ctx.send('Докер')
 
 
 async def setup(bot):

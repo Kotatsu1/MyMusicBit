@@ -41,14 +41,17 @@ jobs:
             # Login to Docker Hub
             sudo docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-            # Pull from Docker Hub
-            sudo docker pull kotatsu111/my-bot:discord_bot
-
             # Stop running container
             sudo docker stop music_bot
 
             # Remove old container
             sudo docker rm music_bot
+
+            # Remove old image
+            sudo docker rmi kotatsu111/umy-bot:discord_bot
+
+            # Pull from Docker Hub
+            sudo docker pull kotatsu111/my-bot:discord_bot
 
             # Run a new container from a new image
             sudo docker run -d --name music_bot kotatsu111/my-bot:discord_bot
