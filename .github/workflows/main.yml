@@ -54,4 +54,4 @@ jobs:
             sudo docker pull kotatsu111/my-bot:discord_bot
 
             # Run a new container from a new image
-            sudo docker run -d --name music_bot kotatsu111/my-bot:discord_bot
+            sudo docker run -d --name music_bot -e DISCORD_TOKEN=${{ secrets.DISCORD_TOKEN }} kotatsu111/my-bot:discord_bot
