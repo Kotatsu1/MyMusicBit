@@ -48,7 +48,7 @@ jobs:
             sudo docker rm music_bot
 
             # Remove old image
-            sudo docker rmi kotatsu111/umy-bot:discord_bot
+            sudo docker rmi kotatsu111/my-bot:discord_bot
 
             # Pull from Docker Hub
             sudo docker pull kotatsu111/my-bot:discord_bot
