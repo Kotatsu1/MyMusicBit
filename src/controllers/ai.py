@@ -1,4 +1,8 @@
 import openai
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def chat(message):
 
@@ -7,7 +11,7 @@ def chat(message):
     ]
 
 
-    openai.api_key = "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"
+    openai.api_key = os.getenv("OPENAI_API")
     messages = message_log
     messages.append({"role": "user", "content": message})
     chat = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages, max_tokens=256)

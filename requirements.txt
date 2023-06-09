@@ -1,4 +1,8 @@
-discord
+py-cord
 PyNaCl
 yt-dlp
 python-dotenv
+openai
+torch
+numpy
+vosk

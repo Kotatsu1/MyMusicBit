@@ -10,6 +10,7 @@ bot = commands.Bot(command_prefix='/',  intents=discord.Intents.all())
 
 async def setup(bot):
     await bot.load_extension("music_cog")
+    await bot.load_extension("ai_cog")
 
 @bot.event
 async def on_ready():

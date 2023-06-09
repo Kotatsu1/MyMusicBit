@@ -1,6 +1,0 @@
-openai
-py-cord
-PyNaCl
-torch
-numpy
-vosk
