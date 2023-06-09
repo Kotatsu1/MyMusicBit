@@ -1,10 +1,10 @@
 import torch
-from ai import chat
+from controllers.ai import chat
 
 def sound_ai(q):
     device = torch.device('cpu')
     torch.set_num_threads(4)
-    local_file = 'model.pt'
+    local_file = '/src/models/model.pt'
 
     model = torch.package.PackageImporter(local_file).load_pickle("tts_models", "model")
     model.to(device)

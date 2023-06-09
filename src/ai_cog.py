@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import subprocess
+import os
 from controllers.silero import sound_ai
 from controllers.stt import recognition
 
@@ -26,33 +27,33 @@ class ai_cog(commands.Cog):
         self.bot = bot
 
 
-    @commands.command(name="ai")
-    async def ai(self, ctx):
-        view = AiView(ctx)
-        await ctx.send(view=view)
+    # @commands.command(name="ai")
+    # async def ai(self, ctx):
+    #     view = AiView(ctx)
+    #     await ctx.send(view=view)
 
 
-    @bot.command()
+    @commands.command(name="listen")
     async def listen(self, ctx):
         if ctx.voice_client:
-            ctx.voice_client.start_recording(discord.sinks.WaveSink(), callback, ctx)
+            ctx.voice_client.start_recording(discord.sinks.WaveSink(), self.callback, ctx)
         else:
             await ctx.send("not in a voice channel!")
 
 
-    @bot.command()
+    @commands.command(name="stop")
     async def stop(self, ctx):
         ctx.voice_client.stop_recording()
 
 
     async def get_answer(self, ctx, text):
         vc = ctx.message.author.voice.channel
-        voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+        voice = discord.utils.get(self.bot.voice_clients, guild=ctx.guild)
         if voice == None:
             await vc.connect()
         try:
             link = sound_ai(text)
-            ctx.voice_client.play(discord.FFmpegPCMAudio(executable='ffmpeg.exe', source=link))
+            ctx.voice_client.play(discord.FFmpegPCMAudio(source=link))
         except Exception as ex:
             await ctx.send(ex)
 
@@ -62,16 +63,16 @@ class ai_cog(commands.Cog):
             if user_id == ctx.author.id:
                 audio: discord.sinks.core.AudioData = audio
                 
-                if os.path.exists('mono.wav'):
-                    os.remove('mono.wav')
-                with open('stereo.wav', "wb") as f:
+                if os.path.exists('/src/pregenearted_sounds/mono.wav'):
+                    os.remove('/src/pregenearted_sounds/mono.wav')
+                with open('/src/pregenearted_sounds/stereo.wav', "wb") as f:
                     f.write(audio.file.getvalue())
 
-                subprocess.call(["ffmpeg", "-i", 'stereo.wav', "-map_channel", "0.0.0", 'mono.wav'])
+                subprocess.call(["ffmpeg", "-i", '/src/pregenearted_sounds/stereo.wav', "-map_channel", "0.0.0", '/src/pregenearted_sounds/mono.wav'])
 
                 text = recognition()
-                ctx.voice_client.play(discord.FFmpegPCMAudio(executable='ffmpeg.exe', source='on_ready.wav'))
-                await get_answer(ctx, text)
+                ctx.voice_client.play(discord.FFmpegPCMAudio(source='/src/pregenearted_sounds/on_ready.wav'))
+                await self.get_answer(ctx, text)
                 
 
 async def setup(bot):

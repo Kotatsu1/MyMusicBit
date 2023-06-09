@@ -13,8 +13,8 @@ def recognition():
         print("Audio file must be WAV format mono PCM.")
         sys.exit(1)
 
-
-    model = vosk.Model("model_small")
+    model_path = '/src/models/model_small'
+    model = vosk.Model(model_path)
 
 
     rec = KaldiRecognizer(model, wf.getframerate())
