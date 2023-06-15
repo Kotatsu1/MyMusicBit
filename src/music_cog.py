@@ -125,5 +125,5 @@ class music_cog(commands.Cog):
         await ctx.send('Test')
 
 
-async def setup(bot):
-    await bot.add_cog(music_cog(bot))
+def setup(bot):
+    bot.add_cog(music_cog(bot))

@@ -75,5 +75,5 @@ class ai_cog(commands.Cog):
                 await self.get_answer(ctx, text)
                 
 
-async def setup(bot):
-    await bot.add_cog(ai_cog(bot))
+def setup(bot):
+    bot.add_cog(ai_cog(bot))
