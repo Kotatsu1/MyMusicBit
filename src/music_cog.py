@@ -125,5 +125,23 @@ class music_cog(commands.Cog):
         await ctx.send('Test')
 
 
+    @commands.command(name="join")
+    async def join(self, ctx):
+        if not ctx.author.voice:
+            await ctx.send("You are not connected to a voice channel.")
+            return
+
+        voice_channel = ctx.author.voice.channel
+        voice_client = ctx.guild.voice_client
+
+        if voice_client and voice_client.is_connected():
+            await voice_client.move_to(voice_channel)
+        else:
+            voice_client = await voice_channel.connect()
+
+        await ctx.send(f"Connected to {voice_channel}")
+
+
+
 def setup(bot):
     bot.add_cog(music_cog(bot))

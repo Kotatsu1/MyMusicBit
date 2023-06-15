@@ -8,12 +8,12 @@ def recognition():
 
     SetLogLevel(-1)
 
-    wf = wave.open('mono.wav', "rb")
+    wf = wave.open('pregenearted_sounds/mono.wav', "rb")
     if wf.getnchannels() != 1 or wf.getsampwidth() != 2 or wf.getcomptype() != "NONE":
         print("Audio file must be WAV format mono PCM.")
         sys.exit(1)
 
-    model_path = '/src/models/model_small'
+    model_path = 'models/model_small'
     model = vosk.Model(model_path)
 
 

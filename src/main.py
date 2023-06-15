@@ -18,4 +18,5 @@ async def on_ready():
     print(f"{bot.user} has connected to Discord!")
 
 
+
 bot.run(os.getenv("DISCORD_TOKEN"))
